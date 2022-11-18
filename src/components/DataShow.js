@@ -1,7 +1,8 @@
 import { useStore } from "./storeContext";
-
+//component to show data
 const DataShow = () => {
   const store = useStore();
+  //see full data structure : https://dummyjson.com/products
   return store.data.products.map((i) => {
     return (
       <div style={{ padding: "0 30px" }} key={i.id}>
@@ -23,7 +24,7 @@ const DataShow = () => {
           dataid={i.id}
           onClick={(e) => console.log(e.target.attributes.dataId.value)}
         >
-          Click to console id
+          Click to console id props
         </button>
         <hr />
       </div>

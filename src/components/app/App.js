@@ -5,21 +5,19 @@ import { useStore } from "../storeContext";
 
 function App() {
   const store = useStore();
-  const [loading, setLoading] = useState(false);
+  //useEffect usage to fetch data
   useEffect(() => {
-    setLoading(true);
     store.loadData();
-    setLoading(false);
   }, [store]);
-  if (loading) return <h1>Loading ...</h1>;
-  if (store.data === null) return <h1>No data!</h1>;
 
+  if (store.data === null) return <h1>No data!</h1>;
+  //page render
   return (
     <>
-      <h1>Data successfully fetched, total : {store.data.limit}</h1>
+      <h1 style={{display:'flex',margin:'auto'}}>Data successfully fetched, total : {store.data.limit}</h1>
       <DataShow />
     </>
   );
 }
-
+//IMPORTANT: observer to subscibre to any changes happen in data store
 export default observer(App);

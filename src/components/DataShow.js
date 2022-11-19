@@ -1,13 +1,17 @@
+import { observer } from "mobx-react-lite";
 import { useStore } from "./storeContext";
 //component to show data
 const DataShow = () => {
+  let x = 0
   const store = useStore();
   //see full data structure : https://dummyjson.com/products
+  
   return store.data.products.map((i) => {
+    x++
     return (
       <div style={{ padding: "0 30px" }} key={i.id}>
         <h1>
-          {i.id}. {i.title}
+          {x}. {i.title}
         </h1>
         <p>
           {i.description}
@@ -21,15 +25,14 @@ const DataShow = () => {
           </h1>
         </strong>
         <button
-          dataid={i.id}
-          onClick={(e) => console.log(e.target.attributes.dataId.value)}
+          onClick={() => (store.removeData(i.id), alert(`Product ${i.title} deleted!`))}
         >
-          Click to console id props
+          Delete
         </button>
         <hr />
       </div>
-    );
+    )
   });
 };
 
-export default DataShow;
+export default observer(DataShow);

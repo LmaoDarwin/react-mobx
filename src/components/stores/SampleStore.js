@@ -1,4 +1,4 @@
-import {makeAutoObservable } from "mobx";
+import { makeAutoObservable } from "mobx";
 import { getData } from "../api/api";
 
 //mobx create store
@@ -10,6 +10,14 @@ class createSampleStore{
     loadData(){
         //getData is a fetch data helper see /components/api/api.js
         getData().then(data => this.data = data)
+    }
+    removeData(key){
+        if(typeof this.data !== "object"){
+            return;
+        }
+        // console.log({key:key,data:this.data.products})
+        this.data.products = this.data.products.filter((data)=> data.id !== key)
+        console.log(this.data)
     }
 
     //mobx makeAutoObservable use
